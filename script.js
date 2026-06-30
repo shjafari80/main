@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupFormHandling();
     setupMobileNav();
     setDynamicVhUnit();
+    setupScrollEffects();
 });
 
 // Animation System
@@ -114,27 +115,56 @@ function setupMobileNav() {
 // Form Handling
 function setupFormHandling() {
     const form = document.querySelector('.form');
-    
+
     if (form) {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Get form data
+
             const formData = new FormData(form);
             const name = formData.get('name');
             const email = formData.get('email');
             const subject = formData.get('subject');
             const message = formData.get('message');
-            
-            // Simple validation
+
             if (!name || !email || !subject || !message) {
                 showNotification('Please fill in all fields', 'error');
                 return;
             }
-            
-            // Simulate form submission
-            showNotification('Message sent successfully!', 'success');
-            form.reset();
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalLabel = submitBtn ? submitBtn.textContent : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+            }
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        showNotification('Message sent successfully!', 'success');
+                        form.reset();
+                    } else {
+                        return response.json().then((data) => {
+                            const msg = (data && data.errors && data.errors.length)
+                                ? data.errors.map(err => err.message).join(', ')
+                                : 'Something went wrong. Please email me directly.';
+                            showNotification(msg, 'error');
+                        });
+                    }
+                })
+                .catch(() => {
+                    showNotification('Network error. Please email me directly at hjafarisharami@gmail.com', 'error');
+                })
+                .finally(() => {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalLabel;
+                    }
+                });
         });
     }
 }
@@ -176,28 +206,37 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// Navbar scroll effect
-window.addEventListener('scroll', function() {
+// Navbar scroll effect + parallax, throttled with requestAnimationFrame
+function setupScrollEffects() {
     const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(248, 249, 250, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
-    } else {
-        navbar.style.background = 'rgba(248, 249, 250, 0.95)';
-        navbar.style.boxShadow = 'none';
-    }
-});
+    const heroMedia = document.querySelector('.hero-photo');
+    let ticking = false;
 
-// Parallax effect for hero section
-window.addEventListener('scroll', function() {
-    const scrolled = window.pageYOffset;
-    const heroSection = document.querySelector('.hero-content');
-    
-    if (heroSection) {
-        const rate = scrolled * -0.5;
-        heroSection.style.transform = `translateY(${rate}px)`;
+    function update() {
+        const scrollY = window.scrollY;
+
+        if (navbar) {
+            navbar.classList.toggle('navbar-scrolled', scrollY > 100);
+        }
+
+        // Apply parallax to the media column only (not the slide-in text),
+        // and use a separate CSS property so it doesn't fight the
+        // slide-in-left/right animation transforms.
+        if (heroMedia) {
+            const rate = scrollY * -0.2;
+            heroMedia.style.setProperty('--parallax-y', `${rate}px`);
+        }
+
+        ticking = false;
     }
-});
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(update);
+            ticking = true;
+        }
+    }, { passive: true });
+}
 
 // Add loading animation
 window.addEventListener('load', function() {
