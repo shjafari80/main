@@ -19,8 +19,8 @@
     <meta name="twitter:description" content="UI/UX designer and full-stack developer specializing in web, network systems, and AI-integrated hardware projects.">
     <meta name="twitter:image" content="content/Profile.png">
 
-    <link rel="icon" type="image/png" href="content/favicon.png">
-    <link rel="apple-touch-icon" href="content/favicon.png">
+    <link rel="icon" type="image/png" href="content/siteicon.png">
+    <link rel="apple-touch-icon" href="content/siteicon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,12 +44,13 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-logo">HJ</div>
+           <!--<div href="content/siteicon.png" class="nav-logo"></div>--> 
             <div class="nav-menu-wrapper">
                 <ul class="nav-menu">
                     <li><a href="#home" class="nav-link">Home</a></li>
                     <li><a href="#about" class="nav-link">About</a></li>
                     <li><a href="#expertise" class="nav-link">Expertise</a></li>
+                    <li><a href="#projects" class="nav-link">project</a></li>
                     <li><a href="#experience" class="nav-link">Experience</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
@@ -180,6 +181,72 @@
             </div>
         </section>
 
+        <!--Projects Section-->
+        <section id="projects" class="full-page projects-section">
+            <div class="container">
+                <div class="section-header slide-in-up">
+                    <h2 class="section-title">Featured Projects</h2>
+                    <p class="section-subtitle">Some of my recent work</p>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card slide-in-left">
+                        <div class="project-visual">
+                            <img src="https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=900&q=80" alt="Mockups of the commerce mobile experience" loading="lazy" decoding="async" width="900" height="600">
+                        </div>
+                        <div class="project-content">
+                            <h3>E-Commerce Mobile App</h3>
+                            <p>A complete mobile shopping experience with intuitive UI/UX design and seamless payment integration.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">React Native</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">MongoDB</span>
+                            </div>
+                            <div class="project-actions">
+                                <span class="btn btn-ghost is-disabled" aria-disabled="true" title="Case study coming soon">View Case Study</span>
+                                <span class="text-link is-disabled" aria-disabled="true" title="Link coming soon">Live Prototype <i class="fas fa-arrow-up-right-from-square"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card slide-in-up">
+                        <div class="project-visual">
+                            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" alt="Abstract visualization of a complex network topology" loading="lazy" decoding="async" width="900" height="600">
+                        </div>
+                        <div class="project-content">
+                            <h3>Enterprise Network Solution</h3>
+                            <p>Comprehensive network infrastructure design for a large corporation with advanced security features.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Cisco</span>
+                                <span class="tech-tag">Network Security</span>
+                                <span class="tech-tag">VPN</span>
+                            </div>
+                            <div class="project-actions">
+                                <span class="btn btn-ghost is-disabled" aria-disabled="true" title="Deck coming soon">Architecture Deck</span>
+                                <span class="text-link is-disabled" aria-disabled="true" title="Link coming soon">Security Audit <i class="fas fa-file-shield"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card slide-in-right">
+                        <div class="project-visual">
+                            <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=900&q=80" alt="IoT sensors with AI dashboard visual" loading="lazy" decoding="async" width="900" height="600">
+                        </div>
+                        <div class="project-content">
+                            <h3>AI-Powered IoT System</h3>
+                            <p>Smart home automation system with machine learning capabilities for energy optimization.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Arduino</span>
+                                <span class="tech-tag">TensorFlow</span>
+                            </div>
+                            <div class="project-actions">
+                                <span class="btn btn-ghost is-disabled" aria-disabled="true" title="Dashboard coming soon">See Dashboard</span>
+                                <span class="text-link is-disabled" aria-disabled="true" title="Link coming soon">Hardware Specs <i class="fas fa-microchip"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Experience Section -->
         <section id="experience" class="full-page experience-section">
             <div class="container">
@@ -304,6 +371,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <script src="script.js"></script>
