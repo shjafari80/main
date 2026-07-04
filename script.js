@@ -22,7 +22,7 @@ function initializeAnimations() {
                 entry.target.classList.add('animate');
                 
                 // Add staggered animation for child elements
-                const children = entry.target.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up');
+                const children = entry.target.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up, .scale-in');
                 children.forEach((child, index) => {
                     setTimeout(() => {
                         child.classList.add('animate');
@@ -33,7 +33,7 @@ function initializeAnimations() {
     }, observerOptions);
 
     // Observe all animated elements
-    const animatedElements = document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up');
+    const animatedElements = document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up, .scale-in');
     animatedElements.forEach(el => observer.observe(el));
 }
 
@@ -244,7 +244,7 @@ window.addEventListener('load', function() {
     
     // Animate hero elements on load
     setTimeout(() => {
-        const heroElements = document.querySelectorAll('.hero-content .slide-in-left, .hero-content .slide-in-right');
+        const heroElements = document.querySelectorAll('.hero-content .slide-in-left, .hero-content .slide-in-right, .scale-in');
         heroElements.forEach((el, index) => {
             setTimeout(() => {
                 el.classList.add('animate');
