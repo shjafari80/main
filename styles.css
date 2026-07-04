@@ -321,6 +321,7 @@ html { scroll-padding-top: 80px; }
 }
 
 .btn-primary {
+    color:white;
     background: var(--color-gradient-primary);
     box-shadow: 0 4px 15px rgba(12, 140, 161, 0.3);
 }
@@ -332,7 +333,7 @@ html { scroll-padding-top: 80px; }
 
 .btn-secondary {
     background: transparent;
-    color: var(--color-cyan-deep);
+    color: var(--color-bg);
     border: 2px solid var(--color-cyan-deep);
 }
 
