@@ -73,13 +73,13 @@ function setupActiveSectionTracking() {
 
     const linkMap = navLinks.reduce((acc, link) => {
         const href = link.getAttribute('href') || '';
-        if (href.startsWith('#')) {
-            acc[href.substring(1)] = link;
-        }
+        if (href.startsWith('#')) acc[href.substring(1)] = link;
         return acc;
     }, {});
 
+    const navHeight = document.querySelector('.navbar')?.offsetHeight || 80;
     let activeId = null;
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -87,14 +87,12 @@ function setupActiveSectionTracking() {
                 if (activeId === id) return;
                 activeId = id;
                 navLinks.forEach(link => link.classList.remove('is-active'));
-                if (linkMap[id]) {
-                    linkMap[id].classList.add('is-active');
-                }
+                if (linkMap[id]) linkMap[id].classList.add('is-active');
             }
         });
     }, {
-        threshold: 0.45,
-        rootMargin: '-10% 0px -10% 0px'
+        threshold: 0,
+        rootMargin: `-${navHeight}px 0px -60% 0px`
     });
 
     sections.forEach(section => observer.observe(section));
