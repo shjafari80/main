@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Not Found — Hossein Jafari Sharmi</title>
+    <meta name="theme-color" content="#0C8CA1">
     <link rel="icon" type="image/png" href="content/siteicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             margin: 0;
@@ -13,32 +18,45 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            gap: 16px;
-            font-family: 'Inter', system-ui, sans-serif;
-            background: #f8f9fa;
-            color: #1b1f3a;
+            gap: 14px;
             text-align: center;
             padding: 20px;
+            background: var(--color-gradient-dark);
+            color: var(--color-text-on-dark);
         }
-        img{border-radius: 20px, ;}
-        h1 { font-size: 4rem; margin: 0; color: #2f80ed; }
-        p { font-size: 1.3rem; }
-        a {
-            color: white;
-            background: #2f80ed;
-            padding: 12px 24px;
-            border-radius: 999px;
-            text-decoration: none;
+        .error-code {
+            font-size: 6rem;
+            font-weight: 700;
+            line-height: 1;
+            background: var(--color-gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .error-line {
+            font-size: 1.15rem;
             font-weight: 600;
+            max-width: 480px;
+        }
+        .horse-img {
+            border-radius: 20px;
+            max-width: 260px;
+            width: 60%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            border: 3px solid var(--color-gold);
+            margin: 10px 0;
+        }
+        .home-btn {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div style="font-size: x-large ;font-weight: 700; color:rgb(49, 135, 247);">how did you get here,</div>
-    <div style="font-size: x-large ;font-weight: 700; color:rgb(49, 135, 247);">there are few pages in this website</div>
-    <img style="border-radius: 20px;" src="content/404horse.gif">
-    <div style="font-size: x-large ;font-weight: 700; color:rgb(49, 135, 247);">this horse was eating in peace here</div>
-    <p>This page doesn't exist — Error 404</p>
-    <a href="/">Back to home</a>
+    <div class="error-code">404</div>
+    <p class="error-line">how did you get here,</p>
+    <p class="error-line">there are few pages in this website</p>
+    <img class="horse-img" src="content/404horse.gif" alt="A horse, unbothered by your broken link">
+    <p class="error-line">this horse was eating in peace here</p>
+    <a href="/" class="btn btn-primary home-btn">Back to home</a>
 </body>
 </html>

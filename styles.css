@@ -192,11 +192,6 @@ html { scroll-padding-top: 80px; }
     width: 100%;
 }
 
-/* Main Content 
-.main-content {
-    padding-top: calc(var(--nav-h) + 20px);
-}*/
-
 /* Full Page Sections */
 .full-page {
     min-height: calc((var(--vh, 1vh) * 100) - 80px);
@@ -238,9 +233,7 @@ html { scroll-padding-top: 80px; }
 
 /* Home Section */
 .home-section {
-    background: url("content/hero-back.jpeg");
-    /*var(--color-gradient-hero)
-    padding: 60px 0 40px;*/
+    background: url("content/Hero-BG.jpeg");
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
