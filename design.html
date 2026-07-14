@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design & Interfaces — Hossein Jafari Sharmi</title>
+    <meta name="description" content="How I approach UI/UX design — responsive layouts, mobile-first navigation, glassmorphism, and the decisions behind them.">
+    <meta name="theme-color" content="#0C8CA1">
+    <link rel="canonical" href="https://hjafarisharami.ir/design.html">
+    <link rel="icon" type="image/png" href="content/siteicon.png">
+    <link rel="apple-touch-icon" href="content/siteicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <a href="index.html#home" class="skip-link">Skip to content</a>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-menu-wrapper">
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="nav-link">Home</a></li>
+                    <li><a href="index.html#expertise" class="nav-link">Expertise</a></li>
+                    <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="full-page">
+            <div class="container">
+                <div class="section-header slide-in-up">
+                    <p class="section-subtitle" style="margin-bottom:8px;">Expertise</p>
+                    <h1 class="section-title">Design & Interfaces</h1>
+                    <p class="section-subtitle">Turning ideas into layouts people actually enjoy using</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="full-page about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <article class="info-card">
+                            <h3>Where this started</h3>
+                            <p>I didn't come into design through a design program — I came into it through building websites and noticing that the visual layer decided whether people trusted the thing I'd built. A clean layout with bad spacing still feels wrong, even if the visitor can't say why. That gap between "technically correct" and "actually pleasant to use" is what pulled me toward design work specifically.</p>
+                            <p>Most of my design work has happened on real projects — portfolio sites, small shopping sites, WordPress builds, blogs — rather than isolated exercises. That means every layout decision had to survive contact with real content: inconsistent image sizes, variable text lengths, and clients who change their minds about copy after the layout is done.</p>
+                        </article>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">Mobile</div>
+                                <div class="stat-label">-first, always</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">RTL/LTR</div>
+                                <div class="stat-label">Multi-language layouts</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="full-page expertise-section">
+            <div class="container">
+                <div class="section-header slide-in-up">
+                    <h2 class="section-title">The problem with "just make it responsive"</h2>
+                    <p class="section-subtitle">Three recurring challenges, and how I actually handle them</p>
+                </div>
+                <div class="expertise-grid">
+                    <div class="expertise-card">
+                        <div class="card-icon">📱</div>
+                        <h3>Mobile-first navigation</h3>
+                        <p>A hamburger menu is easy to build and easy to get subtly wrong — wrong tap targets, menus that open under the fold, active states that don't update when you scroll past a section instead of clicking a link. I design the mobile nav state first, then expand outward to desktop, instead of the other way around.</p>
+                    </div>
+                    <div class="expertise-card">
+                        <div class="card-icon">✨</div>
+                        <h3>Glassmorphism, used carefully</h3>
+                        <p>Frosted-glass panels look great in a mockup and can quietly break on real devices — performance cost, contrast problems, and browser inconsistencies in how <code>backdrop-filter</code> composites on scroll. I treat it as an accent for headers and cards, not a default for every surface.</p>
+                    </div>
+                    <div class="expertise-card">
+                        <div class="card-icon">🎨</div>
+                        <h3>A palette that means something</h3>
+                        <p>I try to derive a site's colors from something real — a photo, a brand mark, a material — rather than picking hex codes that "look nice" in isolation. It gives later design decisions (hover states, active states, accents) an actual rule to follow instead of guesswork.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="full-page experience-section">
+            <div class="container">
+                <div class="section-header slide-in-up">
+                    <h2 class="section-title">A typical design pass</h2>
+                    <p class="section-subtitle">How a layout usually evolves</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"><span class="timeline-dot"></span><span class="timeline-line"></span></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Step 1</div>
+                            <h3>Rough structure</h3>
+                            <p>Blocking out sections with real content lengths, not lorem ipsum — copy length changes spacing decisions more than people expect.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"><span class="timeline-dot"></span><span class="timeline-line"></span></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Step 2</div>
+                            <h3>Mobile pass</h3>
+                            <p>Every section gets tested narrow first. If it breaks at 360px, I fix it before touching desktop styles.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"><span class="timeline-dot"></span><span class="timeline-line"></span></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Step 3</div>
+                            <h3>Motion and accents</h3>
+                            <p>Hover states, transitions, and any glass/gradient effects go in last — once the underlying structure already works without them.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="full-page about-section">
+            <div class="container">
+                <div class="section-header slide-in-up">
+                    <h2 class="section-title">Lessons learned</h2>
+                </div>
+                <div class="expertise-grid">
+                    <div class="expertise-card">
+                        <div class="card-icon">⚠️</div>
+                        <h3>CSS specificity bites quietly</h3>
+                        <p>An <code>:nth-child()</code> selector will beat a plain class every time, even inside a later media query. I've lost hours to overrides that "should have worked" on paper.</p>
+                    </div>
+                    <div class="expertise-card">
+                        <div class="card-icon">🧩</div>
+                        <h3>Wrapper divs matter for stretch/height matching</h3>
+                        <p><code>align-items: stretch</code> only affects direct grid children — the visible card inside still needs <code>flex: 1</code> to actually fill that height.</p>
+                    </div>
+                    <div class="expertise-card">
+                        <div class="card-icon">🔍</div>
+                        <h3>Test on real devices, not just DevTools</h3>
+                        <p>Effects like <code>backdrop-filter</code> on fixed elements behave differently on actual mobile Safari than in a resized desktop browser window.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="full-page contact-section">
+            <div class="container" style="text-align:center;">
+                <h2 class="section-title">Want a layout like this for your project?</h2>
+                <p class="section-subtitle">I'm open to freelance and contract design work.</p>
+                <a href="index.html#contact" class="btn btn-primary">Get In Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
