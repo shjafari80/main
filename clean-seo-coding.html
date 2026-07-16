@@ -32,138 +32,112 @@
             </button>
         </div>
     </nav>
-
-    <main class="main-content">
-        <header class="page-hero">
-            <div class="container">
-                <div class="section-header slide-in-up" style="text-align:center;">
-                    <div class="page-icon">🔒</div>
-                    <p class="section-subtitle" style="margin-bottom:8px;">Expertise</p>
-                    <h1 class="section-title">Clean Code & SEO</h1>
-                    <p class="section-subtitle">Code that stays maintainable, and pages that are actually findable</p>
-                </div>
+ 
+    <header class="page-hero">
+        <div class="container">
+            <div class="section-header slide-in-up" style="text-align:center;">
+                <div class="page-icon">🔒</div>
+                <p class="section-subtitle" style="margin-bottom:8px;">Expertise</p>
+                <h1 class="section-title">Clean Code & SEO</h1>
+                <p class="section-subtitle">Code that stays maintainable, and pages that are actually findable</p>
             </div>
-        </header>
-
-        <section class="full-page about-section">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-text">
-                        <article class="info-card">
-                            <h3>Why this became its own focus area</h3>
-                            <p>This site itself is the clearest example — building it surfaced real problems most tutorials skip. A canonical tag left pointing at an old GitHub Pages URL quietly told Google to ignore the real domain. A sitemap referencing pages that didn't exist yet actively hurt indexing rather than helping it. These aren't exotic edge cases; they're the ordinary failure modes of shipping a real site.</p>
-                            <p>Clean code and SEO end up being the same discipline in practice: both reward being precise about what actually exists versus what you assume exists.</p>
-                        </article>
+        </div>
+    </header>
+ 
+    <nav class="page-toc">
+        <a href="#why-this-matters" class="page-toc-link">Why It Matters</a>
+        <a href="#try-it" class="page-toc-link">Try It</a>
+        <a href="#mistakes" class="page-toc-link">Mistakes</a>
+        <a href="#habits" class="page-toc-link">Habits</a>
+    </nav>
+ 
+    <main class="main-content">
+        <section class="blog-section" id="why-this-matters">
+            <div class="container blog-prose">
+                <h2 class="blog-h2">Why this became its own focus area</h2>
+                <p>This site itself is the clearest example — building it surfaced real problems most tutorials skip. A canonical tag left pointing at an old GitHub Pages URL quietly told Google to ignore the real domain. A sitemap referencing pages that didn't exist yet actively hurt indexing rather than helping it.</p>
+                <p>Clean code and SEO end up being the same discipline in practice: both reward being precise about what actually exists versus what you assume exists.</p>
+            </div>
+        </section>
+ 
+        <section class="blog-section" id="try-it" style="background: var(--color-bg);">
+            <div class="container blog-prose">
+                <h2 class="blog-h2">Specificity, the part that bites quietly</h2>
+                <p>A plain class loses to a pseudo-class selector like <code>:nth-child()</code> every time — even inside a later media query. This exact bug showed up while building this site's own timeline layout. Toggle between the two tabs to see it.</p>
+            </div>
+ 
+            <div class="demo-card">
+                <div class="demo-tabs">
+                    <button class="demo-tab active" data-panel="panel-before">Before (broken)</button>
+                    <button class="demo-tab" data-panel="panel-after">After (fixed)</button>
+                </div>
+                <div class="demo-body">
+                    <div class="demo-panel active" id="panel-before">
+                        <div class="demo-label">Mobile override that silently does nothing</div>
+                        <div class="demo-prompt">.timeline-item:nth-child(2n+1) {
+  text-align: right;
+}
+ 
+@media (max-width: 768px) {
+  .timeline-item {
+    text-align: left; /* never wins */
+  }
+}</div>
+                        <p class="demo-verdict">A plain class (0,1,0 specificity) can never beat a pseudo-class selector (0,2,0), regardless of source order or which one is inside a media query.</p>
                     </div>
-                    <div class="about-stats">
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-number">Semantic</div>
-                                <div class="stat-label">HTML structure</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">Sitemap +</div>
-                                <div class="stat-label">Search Console</div>
-                            </div>
-                        </div>
+                    <div class="demo-panel" id="panel-after">
+                        <div class="demo-label">Matching specificity instead</div>
+                        <div class="demo-output">@media (max-width: 768px) {
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    text-align: left;
+  }
+}</div>
+                        <p class="demo-verdict"><strong>Same specificity, later in the cascade</strong> — this wins cleanly, no <code>!important</code> needed.</p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="full-page expertise-section">
+ 
+        <section class="blog-section" id="mistakes">
             <div class="container">
                 <div class="section-header slide-in-up">
-                    <h2 class="section-title">Technical SEO, the parts that actually matter</h2>
+                    <h2 class="section-title" style="font-size:2.2rem;">Common mistakes, made and fixed</h2>
                 </div>
                 <div class="expertise-grid">
                     <div class="expertise-card">
                         <div class="card-icon">🔗</div>
-                        <h3>Canonical tags point to reality</h3>
-                        <p>A canonical URL tells search engines "this is the real version of this page." If it points at a staging domain or an old hosting URL, your production domain can lose out on indexing entirely, even while loading perfectly for visitors.</p>
+                        <h3>Stale canonical tags</h3>
+                        <p>Canonical and Open Graph URLs copied from an earlier GitHub Pages deployment, never updated after moving to a custom domain.</p>
                     </div>
                     <div class="expertise-card">
                         <div class="card-icon">🗺️</div>
-                        <h3>A sitemap is a promise</h3>
-                        <p>Every URL listed in <code>sitemap.xml</code> should resolve to a real page. Listing pages that don't exist yet doesn't just fail to help — it actively signals broken crawl health to Search Console.</p>
+                        <h3>Sitemap ahead of content</h3>
+                        <p>Submitting a sitemap listing pages that were still in progress, rather than only what was actually deployed.</p>
                     </div>
                     <div class="expertise-card">
                         <div class="card-icon">🖼️</div>
-                        <h3>Social preview tags need absolute URLs</h3>
-                        <p><code>og:image</code> with a relative path silently fails on most platforms. Link previews on Twitter, Discord, or LinkedIn need the full <code>https://</code> URL to actually render an image card.</p>
+                        <h3>Relative social preview images</h3>
+                        <p><code>og:image</code> with a relative path silently fails on most platforms — link previews need the full <code>https://</code> URL.</p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="full-page about-section">
-            <div class="container">
-                <div class="section-header slide-in-up">
-                    <h2 class="section-title">Clean code habits I actually enforce</h2>
-                </div>
-                <div class="expertise-grid">
-                    <div class="expertise-card">
-                        <div class="card-icon">🎯</div>
-                        <h3>Specificity discipline</h3>
-                        <p>A plain class loses to a pseudo-class selector like <code>:nth-child()</code> every time, even inside a later media query. I match selector specificity when overriding, rather than reaching for <code>!important</code> as a first move.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">🧱</div>
-                        <h3>Reusable component classes</h3>
-                        <p>Cards, buttons, and grids share a small set of base classes across the whole site, so a palette or spacing change propagates from one place instead of forty.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">⚡</div>
-                        <h3>Performance as a default, not an afterthought</h3>
-                        <p>Lazy-loading below-the-fold images, avoiding layout-shifting fonts, and keeping scroll-driven effects (like parallax) throttled with <code>requestAnimationFrame</code> instead of firing on every scroll event.</p>
-                    </div>
-                </div>
+ 
+        <section class="blog-section" id="habits" style="background: var(--color-bg);">
+            <div class="container blog-prose">
+                <h2 class="blog-h2">Clean code habits I actually enforce</h2>
+                <p><strong>Reusable component classes.</strong> Cards, buttons, and grids share a small set of base classes across the whole site, so a palette or spacing change propagates from one place instead of forty.</p>
+                <p><strong>Performance as a default.</strong> Lazy-loading below-the-fold images, avoiding layout-shifting fonts, and keeping scroll-driven effects throttled with <code>requestAnimationFrame</code> instead of firing on every scroll event.</p>
             </div>
         </section>
-
-        <section class="full-page experience-section">
-            <div class="container">
-                <div class="section-header slide-in-up">
-                    <h2 class="section-title">Common mistakes I've made and fixed</h2>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-marker"><span class="timeline-dot"></span><span class="timeline-line"></span></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">Mistake</div>
-                            <h3>Leftover staging URLs in production meta tags</h3>
-                            <p>Canonical and Open Graph URLs copied from an earlier GitHub Pages deployment, never updated after moving to a custom domain.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"><span class="timeline-dot"></span><span class="timeline-line"></span></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">Mistake</div>
-                            <h3>Sitemap ahead of actual content</h3>
-                            <p>Submitting a sitemap listing pages that were still in progress, rather than only what was actually deployed.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"><span class="timeline-dot"></span><span class="timeline-line"></span></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">Fix</div>
-                            <h3>A pre-deploy checklist</h3>
-                            <p>Now every deploy gets a quick pass: canonical URL, sitemap accuracy, and a Cloudflare cache purge, before considering a page "done."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="full-page contact-section">
-            <div class="container" style="text-align:center;">
-                <h2 class="section-title">Need a site that's actually indexable?</h2>
-                <p class="section-subtitle">I can audit and fix the technical SEO on an existing site, or build cleanly from scratch.</p>
-                <a href="index.html#contact" class="btn btn-primary">Get In Touch</a>
-            </div>
-        </section>
+ 
+        <div class="page-cta-strip">
+            <p>Need a site that's actually indexable?</p>
+            <a href="index.html#contact" class="btn btn-primary">Get In Touch</a>
+        </div>
     </main>
-
+ 
     <script src="script.js"></script>
 </body>
 </html>

@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     setupMobileNav();
     setDynamicVhUnit();
     setupScrollEffects();
+    setupPageTocTracking();
+    setupDemoTabs();
+    setupFlowDiagrams();
+    setupNavToggleDemo();
 });
 
 // Animation System
@@ -35,6 +39,56 @@ function initializeAnimations() {
     // Observe all animated elements
     const animatedElements = document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up, .scale-in');
     animatedElements.forEach(el => observer.observe(el));
+}
+
+// Generic tab-panel demo — works for any .demo-card with .demo-tab / .demo-panel pairs
+function setupDemoTabs() {
+    document.querySelectorAll('.demo-card').forEach(card => {
+        const tabs = card.querySelectorAll('.demo-tab');
+        const panels = card.querySelectorAll('.demo-panel');
+        if (!tabs.length || !panels.length) return;
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                const target = document.getElementById(tab.dataset.panel);
+                if (target) target.classList.add('active');
+            });
+        });
+    });
+}
+
+// Generic flow-diagram demo — click a node, see its detail panel
+function setupFlowDiagrams() {
+    document.querySelectorAll('.flow-diagram').forEach(diagram => {
+        const nodes = diagram.querySelectorAll('.flow-node');
+        const panels = diagram.querySelectorAll('.flow-panel');
+        if (!nodes.length || !panels.length) return;
+
+        nodes.forEach(node => {
+            node.addEventListener('click', () => {
+                nodes.forEach(n => n.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                node.classList.add('active');
+                const target = document.getElementById(node.dataset.target);
+                if (target) target.classList.add('active');
+            });
+        });
+    });
+}
+
+// Mobile nav toggle demo (design.html)
+function setupNavToggleDemo() {
+    const toggle = document.querySelector('.navdemo-toggle');
+    const menu = document.querySelector('.navdemo-menu');
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener('click', () => {
+        toggle.classList.toggle('open');
+        menu.classList.toggle('open');
+    });
 }
 
 // Smooth Scrolling
@@ -100,6 +154,31 @@ function setupActiveSectionTracking() {
     });
 
     sections.forEach(section => observer.observe(section));
+}
+
+// In-page nav tracking
+function setupPageTocTracking() {
+    const tocLinks = document.querySelectorAll('.page-toc-link');
+    if (!tocLinks.length) return;
+
+    const linkMap = new Map();
+    tocLinks.forEach(link => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) linkMap.set(target, link);
+    });
+    if (!linkMap.size) return;
+
+    const navHeight = document.querySelector('.navbar')?.offsetHeight || 80;
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tocLinks.forEach(l => l.classList.remove('active'));
+                linkMap.get(entry.target)?.classList.add('active');
+            }
+        });
+    }, { rootMargin: `-${navHeight + 40}px 0px -60% 0px`, threshold: 0 });
+
+    linkMap.forEach((_, section) => observer.observe(section));
 }
 
 // Mobile nav toggle

@@ -32,49 +32,39 @@
             </button>
         </div>
     </nav>
-
-    <main class="main-content">
-        <header class="page-hero">
-            <div class="container">
-                <div class="section-header slide-in-up" style="text-align:center;">
-                    <div class="page-icon">🤖</div>
-                    <p class="section-subtitle" style="margin-bottom:8px;">Expertise</p>
-                    <h1 class="section-title">AI & Automation</h1>
-                    <p class="section-subtitle">From "can AI do this?" to "how do I remove this repetitive step?"</p>
-                </div>
+ 
+    <header class="page-hero">
+        <div class="container">
+            <div class="section-header slide-in-up" style="text-align:center;">
+                <div class="page-icon">🤖</div>
+                <p class="section-subtitle" style="margin-bottom:8px;">Expertise</p>
+                <h1 class="section-title">AI & Automation</h1>
+                <p class="section-subtitle">From "can AI do this?" to "how do I remove this repetitive step?"</p>
             </div>
-        </header>
-
-        <section class="full-page about-section">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-text">
-                        <article class="info-card">
-                            <h3>How this became a real interest, not a buzzword</h3>
-                            <p>My entry point into AI work wasn't chatbots — it was video editing. I was manually clipping long recordings down to highlight reels, and the repetitive part (finding the good moments, cutting, syncing) was exactly the kind of task a pipeline could do better than a person doing it for the tenth time.</p>
-                            <p>That led to combining Whisper for transcription with an LLM for identifying interesting segments, then FFmpeg to actually cut the footage automatically. None of these pieces are exotic on their own — the value was in wiring them together into something that ran without me babysitting each step.</p>
-                        </article>
-                    </div>
-                    <div class="about-stats">
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-number">Whisper</div>
-                                <div class="stat-label">Transcription layer</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">FFmpeg</div>
-                                <div class="stat-label">Automated cutting</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        </div>
+    </header>
+ 
+    <nav class="page-toc">
+        <a href="#why-it-matters" class="page-toc-link">Why It Matters</a>
+        <a href="#workflow" class="page-toc-link">Workflow</a>
+        <a href="#try-it" class="page-toc-link">Try It</a>
+        <a href="#lessons" class="page-toc-link">Lessons</a>
+    </nav>
+ 
+    <main class="main-content">
+        <section class="blog-section" id="why-it-matters">
+            <div class="container blog-prose">
+                <h2 class="blog-h2">How this became a real interest, not a buzzword</h2>
+                <p>My entry point into AI work wasn't chatbots — it was video editing. I was manually clipping long recordings down to highlight reels, and the repetitive part (finding the good moments, cutting, syncing) was exactly the kind of task a pipeline could do better than a person doing it for the tenth time.</p>
+                <p>That led to combining Whisper for transcription with an LLM for identifying interesting segments, then FFmpeg to actually cut the footage automatically. None of these pieces are exotic on their own — the value was in wiring them together into something that ran without me babysitting each step.</p>
+                <p>More importantly, it changed the question I ask before starting anything. Instead of "can AI do this?" — which almost always has some technically-yes answer — I started asking "what repetitive step is actually costing me time right now?" That's a much better filter for deciding what's actually worth automating.</p>
             </div>
         </section>
-
-        <section class="full-page expertise-section">
+ 
+        <section class="blog-section" id="workflow" style="background: var(--color-bg);">
             <div class="container">
                 <div class="section-header slide-in-up">
-                    <h2 class="section-title">An example workflow</h2>
+                    <h2 class="section-title" style="font-size:2.2rem;">An example workflow</h2>
                     <p class="section-subtitle">Long recording → short highlight clips, with minimal manual work</p>
                 </div>
                 <div class="expertise-grid">
@@ -86,85 +76,70 @@
                     <div class="expertise-card">
                         <div class="card-icon">🧠</div>
                         <h3>2. Extract highlights</h3>
-                        <p>An LLM reads the transcript and flags timestamp ranges likely to work as standalone clips — this is where prompt design actually matters, since vague instructions return vague picks.</p>
+                        <p>An LLM reads the transcript and flags timestamp ranges likely to work as standalone clips — this is where prompt design actually matters.</p>
                     </div>
                     <div class="expertise-card">
                         <div class="card-icon">✂️</div>
                         <h3>3. Cut automatically</h3>
-                        <p>FFmpeg takes the flagged ranges and renders individual clips, so the manual work left is a quick review pass instead of scrubbing through the entire source.</p>
+                        <p>FFmpeg takes the flagged ranges and renders individual clips, so the manual work left is a quick review pass, not scrubbing the whole source.</p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="full-page about-section">
-            <div class="container">
-                <div class="section-header slide-in-up">
-                    <h2 class="section-title">Prompt engineering, practically</h2>
-                    <p class="section-subtitle">A pattern I return to constantly</p>
+ 
+        <section class="blog-section" id="try-it">
+            <div class="container blog-prose">
+                <h2 class="blog-h2">Prompt engineering, practically</h2>
+                <p>"Find the good parts" gives an LLM nothing to grade against. Giving it a concrete definition — a joke landing, a clear answer to a question, a moment where tone shifts — gives it something to actually check for. Try switching between the two tabs below to see why that difference matters.</p>
+            </div>
+ 
+            <div class="demo-card">
+                <div class="demo-tabs">
+                    <button class="demo-tab active" data-panel="panel-vague">Vague Prompt</button>
+                    <button class="demo-tab" data-panel="panel-structured">Structured Prompt</button>
                 </div>
-                <div class="about-content">
-                    <div class="about-text">
-                        <article class="info-card">
-                            <h3>Vague instructions produce vague output</h3>
-                            <p>"Find the good parts" gives an LLM nothing to grade against. Giving it a concrete definition — a joke landing, a clear answer to a question, a moment where tone shifts — gives it something to actually check for, and the difference in output quality is large.</p>
-                            <pre style="background:var(--color-bg);border-radius:12px;padding:20px;overflow-x:auto;"><code>Given this transcript with timestamps, return JSON:
+                <div class="demo-body">
+                    <div class="demo-panel active" id="panel-vague">
+                        <div class="demo-label">Prompt sent to the model</div>
+                        <div class="demo-prompt">Find the good parts of this transcript.</div>
+                        <div class="demo-label">What comes back</div>
+                        <div class="demo-output">"There's some interesting stuff around the middle, and the ending is pretty good too. Maybe check the part where they talk about the project?"</div>
+                        <p class="demo-verdict">Vague in, vague out — nothing here is directly usable by a script. Someone still has to watch the whole thing to find "the middle."</p>
+                    </div>
+                    <div class="demo-panel" id="panel-structured">
+                        <div class="demo-label">Prompt sent to the model</div>
+                        <div class="demo-prompt">Given this transcript with timestamps, return JSON:
 [{ "start": "00:04:12", "end": "00:04:48", "reason": "..." }]
-
-Only include a segment if it stands alone without
-needing earlier context to make sense.</code></pre>
-                        </article>
-                    </div>
-                    <div class="about-stats">
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-number">JSON out</div>
-                                <div class="stat-label">Structured, parseable results</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">Clear rules</div>
-                                <div class="stat-label">Not vague instructions</div>
-                            </div>
-                        </div>
+ 
+Only include a segment if it stands alone without needing earlier context.</div>
+                        <div class="demo-label">What comes back</div>
+                        <div class="demo-output">[
+  { "start": "00:04:12", "end": "00:04:48",
+    "reason": "Clear standalone answer to the main question" },
+  { "start": "00:18:03", "end": "00:18:41",
+    "reason": "Tone shift, reads as a natural clip ending" }
+]</div>
+                        <p class="demo-verdict"><strong>Structured, parseable</strong>, and each segment comes with its own justification — this feeds straight into FFmpeg without a human re-reading the whole transcript first.</p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="full-page expertise-section">
-            <div class="container">
-                <div class="section-header slide-in-up">
-                    <h2 class="section-title">Lessons learned</h2>
-                </div>
-                <div class="expertise-grid">
-                    <div class="expertise-card">
-                        <div class="card-icon">🔁</div>
-                        <h3>Automate the boring 80%, not the judgment call</h3>
-                        <p>Full automation without a review step tends to ship mistakes confidently. I keep a lightweight human check before anything goes out publicly.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">📐</div>
-                        <h3>Structured output saves more time than clever prompts</h3>
-                        <p>Asking for JSON with a fixed schema turned "parsing AI text output" from a fragile regex problem into a one-line <code>JSON.parse</code>.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">🧭</div>
-                        <h3>The mindset shift mattered more than any single tool</h3>
-                        <p>Moving from "can AI do this" to "what repetitive step is actually costing me time" changed which projects were worth building at all.</p>
-                    </div>
-                </div>
+ 
+        <section class="blog-section" id="lessons" style="background: var(--color-bg);">
+            <div class="container blog-prose">
+                <h2 class="blog-h2">Lessons learned</h2>
+                <p><strong>Automate the boring 80%, not the judgment call.</strong> Full automation without a review step tends to ship mistakes confidently. I keep a lightweight human check before anything goes out publicly.</p>
+                <p><strong>Structured output saves more time than clever prompts.</strong> Asking for JSON with a fixed schema turned "parsing AI text output" from a fragile regex problem into a one-line <code>JSON.parse</code>.</p>
+                <p><strong>The mindset shift mattered more than any single tool.</strong> Moving from "can AI do this" to "what repetitive step is actually costing me time" changed which projects were worth building at all.</p>
             </div>
         </section>
-
-        <section class="full-page contact-section">
-            <div class="container" style="text-align:center;">
-                <h2 class="section-title">Have a repetitive workflow worth automating?</h2>
-                <p class="section-subtitle">Let's talk about what a pipeline for it could look like.</p>
-                <a href="index.html#contact" class="btn btn-primary">Get In Touch</a>
-            </div>
-        </section>
+ 
+        <div class="page-cta-strip">
+            <p>Have a repetitive workflow worth automating?</p>
+            <a href="index.html#contact" class="btn btn-primary">Get In Touch</a>
+        </div>
     </main>
-
+ 
     <script src="script.js"></script>
 </body>
 </html>

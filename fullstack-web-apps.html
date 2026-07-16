@@ -32,262 +32,110 @@
             </button>
         </div>
     </nav>
-
+ 
+    <header class="page-hero">
+        <div class="container">
+            <div class="section-header slide-in-up" style="text-align:center;">
+                <div class="page-icon">🌐</div>
+                <p class="section-subtitle" style="margin-bottom:8px;">Expertise</p>
+                <h1 class="section-title">Full-Stack Web Solutions</h1>
+                <p class="section-subtitle">From an empty domain and a blank VPS to something people can actually visit</p>
+            </div>
+        </div>
+    </header>
+ 
+    <nav class="page-toc">
+        <a href="#starting-point" class="page-toc-link">Starting Point</a>
+        <a href="#how-it-connects" class="page-toc-link">How It Connects</a>
+        <a href="#mistakes" class="page-toc-link">Mistakes</a>
+        <a href="#lessons" class="page-toc-link">Lessons</a>
+    </nav>
+ 
     <main class="main-content">
-        <header class="page-hero">
-            <div class="container">
-                <div class="section-header slide-in-up" style="text-align:center;">
-                    <div class="page-icon">🌐</div>
-                    <p class="section-subtitle" style="margin-bottom:8px;">Expertise</p>
-                    <h1 class="section-title">Full-Stack Web Solutions</h1>
-                    <p class="section-subtitle">From an empty domain and a blank VPS to something people can actually visit</p>
-                </div>
+        <section class="blog-section" id="starting-point">
+            <div class="container blog-prose">
+                <h2 class="blog-h2">Where this actually started</h2>
+                <p>I didn't start with frameworks or a course that walked me through it step by step. I started with an empty VPS, a domain I'd just bought, and no real idea what "pointing a domain at a server" meant in practice. The gap between owning a domain and having a working site turned out to be filled with a lot of small, unglamorous decisions — DNS records, SSL certificates, mail configuration — that no single tutorial covers end to end.</p>
+                <p>A domain isn't a website. Buying one just reserves a name — it doesn't connect to anything until DNS records tell the internet where to send visitors. A VPS is just Linux, nothing more: no control panel, no pre-installed anything, just a blank machine with root access, which means every mistake is yours to fix.</p>
             </div>
-        </header>
-
-        <!-- Introduction -->
-        <section class="full-page about-section">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-text">
-                        <article class="info-card">
-                            <h3>Where this actually started</h3>
-                            <p>I didn't start with frameworks or a course that walked me through it step by step. I started with an empty VPS, a domain I'd just bought, and no real idea what "pointing a domain at a server" meant in practice. The gap between owning a domain and having a working site turned out to be filled with a lot of small, unglamorous decisions — DNS records, SSL certificates, mail configuration — that no single tutorial covers end to end.</p>
-                            <p>What follows isn't a highlight reel. It's closer to the actual order things happened in, including the parts that didn't work the first time.</p>
-                        </article>
+        </section>
+ 
+        <section class="blog-section" id="how-it-connects" style="background: var(--color-bg);">
+            <div class="container blog-prose">
+                <h2 class="blog-h2">How it all actually connects</h2>
+                <p>Click through each stage below to see what it's responsible for — this is the exact chain a request travels through for a typical site I deploy.</p>
+            </div>
+ 
+            <div class="flow-diagram">
+                <div class="flow-nodes">
+                    <button class="flow-node active" data-target="flow-dns">1. Domain & DNS</button>
+                    <span class="flow-arrow">→</span>
+                    <button class="flow-node" data-target="flow-cf">2. Cloudflare</button>
+                    <span class="flow-arrow">→</span>
+                    <button class="flow-node" data-target="flow-origin">3. Origin Server</button>
+                    <span class="flow-arrow">→</span>
+                    <button class="flow-node" data-target="flow-browser">4. Browser</button>
+                </div>
+                <div class="flow-panels">
+                    <div class="flow-panel active" id="flow-dns">
+                        <h4>Domain & DNS</h4>
+                        <p>An A record points the domain at a server's IP address. MX records handle where email gets delivered — a completely separate system from web hosting. SPF, DKIM, and DMARC (all TXT records) prove outgoing email isn't forged.</p>
                     </div>
-                    <div class="about-stats">
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-number">VPS → Live</div>
-                                <div class="stat-label">Bare server to production</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">DNS · SSL · Mail</div>
-                                <div class="stat-label">The parts tutorials skip</div>
-                            </div>
-                        </div>
+                    <div class="flow-panel" id="flow-cf">
+                        <h4>Cloudflare</h4>
+                        <p>Proxies traffic, terminates SSL at the edge, and caches static assets — the origin server does less work and isn't the first point of contact for every request.</p>
+                    </div>
+                    <div class="flow-panel" id="flow-origin">
+                        <h4>Origin Server</h4>
+                        <p>For dynamic sites: a VPS running CyberPanel over Apache/OpenLiteSpeed, MySQL, and Let's Encrypt. For static sites: GitHub Pages, rebuilding automatically on every push.</p>
+                    </div>
+                    <div class="flow-panel" id="flow-browser">
+                        <h4>Browser</h4>
+                        <p>Receives the final response — but only shows up in search results at all if canonical tags, sitemap, and social preview tags actually point at the right domain.</p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- The Problem / Starting Point -->
-        <section class="full-page expertise-section">
+ 
+        <section class="blog-section" id="mistakes">
             <div class="container">
                 <div class="section-header slide-in-up">
-                    <h2 class="section-title">The starting problem</h2>
-                    <p class="section-subtitle">"I have a domain and a server. Now what?"</p>
-                </div>
-                <div class="expertise-grid">
-                    <div class="expertise-card">
-                        <div class="card-icon">🌐</div>
-                        <h3>A domain isn't a website</h3>
-                        <p>Buying a domain just reserves a name — it doesn't connect to anything until DNS records tell the internet where to send visitors. That distinction sounds obvious written down, but it's genuinely confusing the first time you're staring at a DNS panel with A, CNAME, MX, and TXT rows and no idea which one does what.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">🖥️</div>
-                        <h3>A VPS is just Linux, nothing more</h3>
-                        <p>No control panel, no pre-installed anything. It's a blank machine with root access — which is powerful, but also means every mistake is yours to fix, including the ones that lock you out of SSH.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">🔒</div>
-                        <h3>"Secure by default" isn't real</h3>
-                        <p>SSL, firewall rules, and mail authentication (SPF/DKIM/DMARC) all have to be set up deliberately. Skip one and the failure shows up somewhere unexpected — usually as email landing in spam, or a browser flagging the site as untrusted.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- DNS deep section -->
-        <section class="full-page about-section">
-            <div class="container">
-                <div class="section-header slide-in-up">
-                    <h2 class="section-title">DNS: the part everyone underestimates</h2>
-                </div>
-                <div class="about-content">
-                    <div class="about-text">
-                        <article class="info-card">
-                            <h3>What each record type is actually for</h3>
-                            <p>An <strong>A record</strong> points a domain straight at a server's IP address. A <strong>CNAME</strong> points a subdomain at another domain name instead of an IP — useful for things like <code>www</code> pointing at the root domain. An <strong>MX record</strong> tells other mail servers where to deliver email for your domain, which is a completely separate system from your website's hosting.</p>
-                            <p>Then there's the trio that trips up almost everyone doing this for the first time: <strong>SPF</strong>, <strong>DKIM</strong>, and <strong>DMARC</strong> — all TXT records, all related to proving your outgoing email isn't forged. Get these wrong and your own emails get marked as spam by the very providers you're emailing.</p>
-                        </article>
-                    </div>
-                    <div class="about-stats">
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-number">SPF</div>
-                                <div class="stat-label">Who's allowed to send as you</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">DKIM + DMARC</div>
-                                <div class="stat-label">Signs and enforces trust</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Architecture / stack -->
-        <section class="full-page expertise-section">
-            <div class="container">
-                <div class="section-header slide-in-up">
-                    <h2 class="section-title">A typical stack, piece by piece</h2>
-                    <p class="section-subtitle">How the layers actually connect</p>
-                </div>
-                <div class="expertise-grid">
-                    <div class="expertise-card">
-                        <div class="card-icon">☁️</div>
-                        <h3>Cloudflare in front</h3>
-                        <p>Handles DNS, proxies traffic, terminates SSL at the edge, and caches static assets — meaning the origin server does less work and is less directly exposed.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">🧰</div>
-                        <h3>CyberPanel on the VPS</h3>
-                        <p>A control panel over Apache/OpenLiteSpeed, MySQL, and Let's Encrypt — genuinely useful, but I always went in wanting to understand what it was doing underneath, not just clicking buttons.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">🗄️</div>
-                        <h3>MySQL for anything dynamic</h3>
-                        <p>Whether it's WordPress's own tables or a custom PHP app, the database is usually the part that needs the most care around backups — it's the one piece that isn't trivially reproducible from source files alone.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">📦</div>
-                        <h3>Static sites on GitHub Pages</h3>
-                        <p>For portfolio/marketing-style sites with no server-side logic, GitHub Pages behind Cloudflare removes the VPS entirely — free hosting, automatic deploys on push, and Cloudflare still handles DNS and caching.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Example workflow -->
-        <section class="full-page experience-section">
-            <div class="container">
-                <div class="section-header slide-in-up">
-                    <h2 class="section-title">Deploying a static site — the actual steps</h2>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-marker"><span class="timeline-dot"></span><span class="timeline-line"></span></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">1</div>
-                            <h3>Push to GitHub</h3>
-                            <p>Repo builds automatically via GitHub Pages on every push to the main branch — no manual upload step.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"><span class="timeline-dot"></span><span class="timeline-line"></span></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">2</div>
-                            <h3>Point DNS at GitHub Pages</h3>
-                            <p>A records for the apex domain, plus a <code>CNAME</code> file in the repo root containing the custom domain — miss this file and the custom domain silently stops resolving on the next rebuild.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"><span class="timeline-dot"></span><span class="timeline-line"></span></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">3</div>
-                            <h3>Proxy through Cloudflare</h3>
-                            <p>SSL mode set to Full (Strict), not Flexible — Flexible mode with GitHub Pages can cause redirect loops that are confusing to debug because both ends technically "work."</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"><span class="timeline-dot"></span><span class="timeline-line"></span></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">4</div>
-                            <h3>Verify indexing</h3>
-                            <p>Canonical tags, sitemap, and Search Console submission — a site can be live and correctly hosted while still being invisible to Google if these are wrong.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Common mistakes -->
-        <section class="full-page about-section">
-            <div class="container">
-                <div class="section-header slide-in-up">
-                    <h2 class="section-title">Mistakes I've actually made</h2>
+                    <h2 class="section-title" style="font-size:2.2rem;">Mistakes I've actually made</h2>
                 </div>
                 <div class="expertise-grid">
                     <div class="expertise-card">
                         <div class="card-icon">🔁</div>
                         <h3>Flexible SSL + GitHub Pages</h3>
-                        <p>Caused an infinite redirect loop — Cloudflare talking HTTP to an origin that itself redirects HTTP to HTTPS. Switching to Full (Strict) fixed it immediately once I understood why it was happening.</p>
+                        <p>Caused an infinite redirect loop — Cloudflare talking HTTP to an origin that redirects HTTP to HTTPS. Switching to Full (Strict) fixed it immediately.</p>
                     </div>
                     <div class="expertise-card">
                         <div class="card-icon">📧</div>
                         <h3>Missing SPF record</h3>
-                        <p>Outgoing mail from a custom domain landed in spam for weeks before I traced it back to a missing SPF TXT record — an easy fix once identified, a confusing one until then.</p>
+                        <p>Outgoing mail landed in spam for weeks before I traced it back to a missing SPF TXT record.</p>
                     </div>
                     <div class="expertise-card">
                         <div class="card-icon">🗃️</div>
-                        <h3>Assuming files were the whole backup</h3>
-                        <p>Backing up a WordPress site's files without the MySQL database is not a backup — it's half of one. Learned this before it cost data, but only barely.</p>
+                        <h3>Files without the database</h3>
+                        <p>Backing up a WordPress site's files without the MySQL database isn't a backup — it's half of one.</p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- Lessons + Future -->
-        <section class="full-page expertise-section">
-            <div class="container">
-                <div class="section-header slide-in-up">
-                    <h2 class="section-title">Lessons learned & what's next</h2>
-                </div>
-                <div class="expertise-grid">
-                    <div class="expertise-card">
-                        <div class="card-icon">🧭</div>
-                        <h3>Understand the layer below the panel</h3>
-                        <p>CyberPanel is genuinely useful, but knowing what it's doing to Apache/Nginx config underneath means I can actually fix things when the panel's UI doesn't cover the situation.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">🛡️</div>
-                        <h3>Treat email auth as part of deployment, not an afterthought</h3>
-                        <p>SPF/DKIM/DMARC now go in on day one of any new domain, not after the first delivery problem shows up.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">🚀</div>
-                        <h3>Next: automated backup verification</h3>
-                        <p>Backups that are never test-restored are an assumption, not a guarantee — that's the next piece I want to build properly, not just configure and trust.</p>
-                    </div>
-                </div>
+ 
+        <section class="blog-section" id="lessons" style="background: var(--color-bg);">
+            <div class="container blog-prose">
+                <h2 class="blog-h2">Lessons learned</h2>
+                <p><strong>Understand the layer below the panel.</strong> CyberPanel is genuinely useful, but knowing what it's doing to Apache/Nginx config underneath means I can fix things the panel's UI doesn't cover.</p>
+                <p><strong>Treat email auth as part of deployment, not an afterthought.</strong> SPF/DKIM/DMARC now go in on day one of any new domain, not after the first delivery problem shows up.</p>
             </div>
         </section>
-
-        <!-- FAQ -->
-        <section class="full-page about-section">
-            <div class="container">
-                <div class="section-header slide-in-up">
-                    <h2 class="section-title">A few common questions</h2>
-                </div>
-                <div style="max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:16px;">
-                    <details class="info-card">
-                        <summary style="cursor:pointer;font-weight:600;">Do you use a VPS for every project?</summary>
-                        <p style="margin-top:12px;">No — static portfolio/marketing sites go on GitHub Pages behind Cloudflare, since there's no server-side logic to justify a VPS. Anything needing a database, custom backend, or WordPress goes on a VPS with CyberPanel.</p>
-                    </details>
-                    <details class="info-card">
-                        <summary style="cursor:pointer;font-weight:600;">Why Cloudflare in front of everything?</summary>
-                        <p style="margin-top:12px;">DNS management, edge SSL termination, and caching, largely for free at the tiers I need. It also means the origin server's real IP isn't the first point of contact for every request.</p>
-                    </details>
-                    <details class="info-card">
-                        <summary style="cursor:pointer;font-weight:600;">What's the most common deployment mistake you see?</summary>
-                        <p style="margin-top:12px;">Treating SSL mode ("Flexible" vs "Full/Strict") as a checkbox instead of something tied to how the origin server actually behaves — it's the single most common cause of confusing redirect loops.</p>
-                    </details>
-                </div>
-            </div>
-        </section>
-
-        <section class="full-page contact-section">
-            <div class="container" style="text-align:center;">
-                <h2 class="section-title">Need something deployed properly, not just "up"?</h2>
-                <p class="section-subtitle">Domain, hosting, SSL, email — I can take it from empty to production.</p>
-                <a href="index.html#contact" class="btn btn-primary">Get In Touch</a>
-            </div>
-        </section>
+ 
+        <div class="page-cta-strip">
+            <p>Need something deployed properly, not just "up"?</p>
+            <a href="index.html#contact" class="btn btn-primary">Get In Touch</a>
+        </div>
     </main>
-
+ 
     <script src="script.js"></script>
 </body>
 </html>

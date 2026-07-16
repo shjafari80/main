@@ -32,140 +32,97 @@
             </button>
         </div>
     </nav>
-
-    <main class="main-content">
-        <header class="page-hero">
-            <div class="container">
-                <div class="section-header slide-in-up" style="text-align:center;">
-                    <div class="page-icon">🎨</div>
-                    <p class="section-subtitle" style="margin-bottom:8px;">Expertise</p>
-                    <h1 class="section-title">Design & Interfaces</h1>
-                    <p class="section-subtitle">Turning ideas into layouts people actually enjoy using</p>
-                </div>
+ 
+    <header class="page-hero">
+        <div class="container">
+            <div class="section-header slide-in-up" style="text-align:center;">
+                <div class="page-icon">🎨</div>
+                <p class="section-subtitle" style="margin-bottom:8px;">Expertise</p>
+                <h1 class="section-title">Design & Interfaces</h1>
+                <p class="section-subtitle">Turning ideas into layouts people actually enjoy using</p>
             </div>
-        </header>
-
-        <section class="full-page about-section">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-text">
-                        <article class="info-card">
-                            <h3>Where this started</h3>
-                            <p>I didn't come into design through a design program — I came into it through building websites and noticing that the visual layer decided whether people trusted the thing I'd built. A clean layout with bad spacing still feels wrong, even if the visitor can't say why. That gap between "technically correct" and "actually pleasant to use" is what pulled me toward design work specifically.</p>
-                            <p>Most of my design work has happened on real projects — portfolio sites, small shopping sites, WordPress builds, blogs — rather than isolated exercises. That means every layout decision had to survive contact with real content: inconsistent image sizes, variable text lengths, and clients who change their minds about copy after the layout is done.</p>
-                        </article>
-                    </div>
-                    <div class="about-stats">
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-number">Mobile</div>
-                                <div class="stat-label">-first, always</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">RTL/LTR</div>
-                                <div class="stat-label">Multi-language layouts</div>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+    </header>
+ 
+    <nav class="page-toc">
+        <a href="#where-it-started" class="page-toc-link">Where It Started</a>
+        <a href="#try-it" class="page-toc-link">Try It</a>
+        <a href="#process" class="page-toc-link">Process</a>
+        <a href="#lessons" class="page-toc-link">Lessons</a>
+    </nav>
+ 
+    <main class="main-content">
+        <section class="blog-section" id="where-it-started">
+            <div class="container blog-prose">
+                <h2 class="blog-h2">Where this started</h2>
+                <p>I didn't come into design through a design program — I came into it through building websites and noticing that the visual layer decided whether people trusted the thing I'd built. A clean layout with bad spacing still feels wrong, even if the visitor can't say why. That gap between "technically correct" and "actually pleasant to use" is what pulled me toward design work specifically.</p>
+                <p>Most of my design work has happened on real projects rather than isolated exercises. That means every layout decision had to survive contact with real content: inconsistent image sizes, variable text lengths, and requirements that change after the layout is already done.</p>
+            </div>
+        </section>
+ 
+        <section class="blog-section" id="try-it" style="background: var(--color-bg);">
+            <div class="container blog-prose">
+                <h2 class="blog-h2">Mobile-first navigation, in practice</h2>
+                <p>A hamburger menu is easy to build and easy to get subtly wrong — wrong tap targets, menus that open under the fold, active states that don't update when scrolling past a section. Here's a small working version of the pattern I actually use — tap the icon.</p>
+            </div>
+ 
+            <div class="navdemo-frame">
+                <div class="navdemo-bar">
+                    <span class="navdemo-logo">●</span>
+                    <button class="navdemo-toggle" aria-label="Toggle demo menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+                <div class="navdemo-menu">
+                    <a href="#try-it">Home</a>
+                    <a href="#try-it">About</a>
+                    <a href="#try-it">Work</a>
+                    <a href="#try-it">Contact</a>
                 </div>
             </div>
         </section>
-
-        <section class="full-page expertise-section">
+ 
+        <section class="blog-section" id="process">
             <div class="container">
                 <div class="section-header slide-in-up">
-                    <h2 class="section-title">The problem with "just make it responsive"</h2>
-                    <p class="section-subtitle">Three recurring challenges, and how I actually handle them</p>
+                    <h2 class="section-title" style="font-size:2.2rem;">A typical design pass</h2>
+                    <p class="section-subtitle">How a layout usually evolves</p>
                 </div>
                 <div class="expertise-grid">
                     <div class="expertise-card">
+                        <div class="card-icon">📐</div>
+                        <h3>1. Rough structure</h3>
+                        <p>Blocking out sections with real content lengths, not lorem ipsum — copy length changes spacing decisions more than people expect.</p>
+                    </div>
+                    <div class="expertise-card">
                         <div class="card-icon">📱</div>
-                        <h3>Mobile-first navigation</h3>
-                        <p>A hamburger menu is easy to build and easy to get subtly wrong — wrong tap targets, menus that open under the fold, active states that don't update when you scroll past a section instead of clicking a link. I design the mobile nav state first, then expand outward to desktop, instead of the other way around.</p>
+                        <h3>2. Mobile pass</h3>
+                        <p>Every section gets tested narrow first. If it breaks at 360px, I fix it before touching desktop styles.</p>
                     </div>
                     <div class="expertise-card">
                         <div class="card-icon">✨</div>
-                        <h3>Glassmorphism, used carefully</h3>
-                        <p>Frosted-glass panels look great in a mockup and can quietly break on real devices — performance cost, contrast problems, and browser inconsistencies in how <code>backdrop-filter</code> composites on scroll. I treat it as an accent for headers and cards, not a default for every surface.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">🎨</div>
-                        <h3>A palette that means something</h3>
-                        <p>I try to derive a site's colors from something real — a photo, a brand mark, a material — rather than picking hex codes that "look nice" in isolation. It gives later design decisions (hover states, active states, accents) an actual rule to follow instead of guesswork.</p>
+                        <h3>3. Motion and accents</h3>
+                        <p>Hover states, transitions, and any glass/gradient effects go in last — once the underlying structure already works without them.</p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="full-page experience-section">
-            <div class="container">
-                <div class="section-header slide-in-up">
-                    <h2 class="section-title">A typical design pass</h2>
-                    <p class="section-subtitle">How a layout usually evolves</p>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-marker"><span class="timeline-dot"></span><span class="timeline-line"></span></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">Step 1</div>
-                            <h3>Rough structure</h3>
-                            <p>Blocking out sections with real content lengths, not lorem ipsum — copy length changes spacing decisions more than people expect.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"><span class="timeline-dot"></span><span class="timeline-line"></span></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">Step 2</div>
-                            <h3>Mobile pass</h3>
-                            <p>Every section gets tested narrow first. If it breaks at 360px, I fix it before touching desktop styles.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"><span class="timeline-dot"></span><span class="timeline-line"></span></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">Step 3</div>
-                            <h3>Motion and accents</h3>
-                            <p>Hover states, transitions, and any glass/gradient effects go in last — once the underlying structure already works without them.</p>
-                        </div>
-                    </div>
-                </div>
+ 
+        <section class="blog-section" id="lessons" style="background: var(--color-bg);">
+            <div class="container blog-prose">
+                <h2 class="blog-h2">Lessons learned</h2>
+                <p><strong>CSS specificity bites quietly.</strong> An <code>:nth-child()</code> selector will beat a plain class every time, even inside a later media query. I've lost hours to overrides that "should have worked" on paper.</p>
+                <p><strong>Wrapper divs matter for stretch/height matching.</strong> <code>align-items: stretch</code> only affects direct grid children — the visible card inside still needs <code>flex: 1</code> to actually fill that height.</p>
+                <p><strong>Test on real devices, not just DevTools.</strong> Effects like <code>backdrop-filter</code> on fixed elements behave differently on actual mobile Safari than in a resized desktop browser window.</p>
             </div>
         </section>
-
-        <section class="full-page about-section">
-            <div class="container">
-                <div class="section-header slide-in-up">
-                    <h2 class="section-title">Lessons learned</h2>
-                </div>
-                <div class="expertise-grid">
-                    <div class="expertise-card">
-                        <div class="card-icon">⚠️</div>
-                        <h3>CSS specificity bites quietly</h3>
-                        <p>An <code>:nth-child()</code> selector will beat a plain class every time, even inside a later media query. I've lost hours to overrides that "should have worked" on paper.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">🧩</div>
-                        <h3>Wrapper divs matter for stretch/height matching</h3>
-                        <p><code>align-items: stretch</code> only affects direct grid children — the visible card inside still needs <code>flex: 1</code> to actually fill that height.</p>
-                    </div>
-                    <div class="expertise-card">
-                        <div class="card-icon">🔍</div>
-                        <h3>Test on real devices, not just DevTools</h3>
-                        <p>Effects like <code>backdrop-filter</code> on fixed elements behave differently on actual mobile Safari than in a resized desktop browser window.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="full-page contact-section">
-            <div class="container" style="text-align:center;">
-                <h2 class="section-title">Want a layout like this for your project?</h2>
-                <p class="section-subtitle">I'm open to freelance and contract design work.</p>
-                <a href="index.html#contact" class="btn btn-primary">Get In Touch</a>
-            </div>
-        </section>
+ 
+        <div class="page-cta-strip">
+            <p>Want a layout like this for your project?</p>
+            <a href="index.html#contact" class="btn btn-primary">Get In Touch</a>
+        </div>
     </main>
-
+ 
     <script src="script.js"></script>
 </body>
 </html>
