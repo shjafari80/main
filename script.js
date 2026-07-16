@@ -43,9 +43,14 @@ function setupSmoothScrolling() {
     
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Only intercept plain "#section" links — let normal links
+            // like "index.html#section" navigate the browser's own way.
+            if (!href.startsWith('#')) return;
+            
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
+            const targetSection = document.querySelector(href);
             
             if (targetSection) {
                 const offsetTop = targetSection.getBoundingClientRect().top + window.pageYOffset;
@@ -53,7 +58,6 @@ function setupSmoothScrolling() {
                     top: offsetTop,
                     behavior: 'smooth'
                 });
-                // close mobile menu after click
                 const navMenu = document.querySelector('.nav-menu');
                 if (navMenu && navMenu.classList.contains('open')) {
                     navMenu.classList.remove('open');
