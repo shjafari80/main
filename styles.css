@@ -1358,21 +1358,26 @@ background: var(--color-gradient-surface);
 }
 
 .page-toc {
+    position: relative;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
     margin: -30px auto 40px;
-    padding: 12px 20px;
+    padding: 6px;
     max-width: fit-content;
     background: rgba(255,255,255,0.6);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-radius: 999px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    position: relative;
     z-index: 2;
 }
+
+.page-toc-track {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 .page-toc-link {
     padding: 8px 18px;
     border-radius: 999px;
@@ -1381,6 +1386,7 @@ background: var(--color-gradient-surface);
     font-size: 0.9rem;
     font-weight: 600;
     transition: all 0.25s ease;
+    white-space: nowrap;
 }
 
 .page-toc-link:hover,
@@ -1657,6 +1663,37 @@ background: var(--color-gradient-surface);
     
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+
+            .page-toc {
+        max-width: calc(100% - 32px);
+        margin: -20px 16px 32px;
+        padding: 10px 12px;
+    }
+
+    .page-toc-track {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        transition: mask-image 0.2s ease, -webkit-mask-image 0.2s ease;
+    }
+    .page-toc-track::-webkit-scrollbar { display: none; }
+    .page-toc-track { scrollbar-width: none; -ms-overflow-style: none; }
+    .page-toc-link { flex-shrink: 0; scroll-snap-align: start; }
+
+    /* fade only the links, never the shell behind them */
+    .page-toc-track.show-fade-left:not(.show-fade-right) {
+        mask-image: linear-gradient(to right, transparent, black 24px);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 24px);
+    }
+    .page-toc-track.show-fade-right:not(.show-fade-left) {
+        mask-image: linear-gradient(to right, black, black calc(100% - 24px), transparent);
+        -webkit-mask-image: linear-gradient(to right, black, black calc(100% - 24px), transparent);
+    }
+    .page-toc-track.show-fade-left.show-fade-right {
+        mask-image: linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent);
     }
 }
 

@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupDemoTabs();
     setupFlowDiagrams();
     setupNavToggleDemo();
+    setupTocScrollFade();
 });
 
 // Animation System
@@ -285,6 +286,25 @@ function showNotification(message, type = 'info') {
             document.body.removeChild(notification);
         }, 300);
     }, 3000);
+}
+
+function setupTocScrollFade() {
+    const track = document.querySelector('.page-toc-track');
+    if (!track) return;
+
+    function update() {
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        if (maxScroll <= 2) {
+            track.classList.remove('show-fade-left', 'show-fade-right');
+            return;
+        }
+        track.classList.toggle('show-fade-left', track.scrollLeft > 4);
+        track.classList.toggle('show-fade-right', track.scrollLeft < maxScroll - 4);
+    }
+
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
 }
 
 // Navbar scroll effect + parallax, throttled with requestAnimationFrame
